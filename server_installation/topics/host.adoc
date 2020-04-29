@@ -59,6 +59,17 @@ If you do not want to expose the admin endpoints and console on the public domai
 a fixed URL for the admin console, which is different to the `frontendUrl`. It is also required to block access to
 `/auth/admin` externally, for details on how to do that refer to the link:{adminguide_link}[{adminguide_name}].
 
+To update the `adminUrl` with jboss-cli use the following command:
+
+[source,bash]
+----
+/subsystem=keycloak-server/spi=hostname/provider=default:write-attribute(name=properties.adminUrl,value="https://auth-admin.example.com/adminPath")
+----
+
+
+**_NOTE:_** if the frontendUrl or the adminUrl use a custom path, don't forget to rewrite the http requests in order to match to the defined web-context in the keycloak-server subsystem .
+
+
 === Custom provider
 
 To develop a custom hostname provider you need to implement `org.keycloak.urls.HostnameProviderFactory` and
